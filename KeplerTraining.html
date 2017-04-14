@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+
+		<meta charset="UTF-8">
+
+		<link href="https://fonts.googleapis.com/css?family=Nimbus+Sans+L" type="text/css" rel="stylesheet" >
+
+		<!-- Código del Datepicker de JQuery UI en Inglés
+			<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />
+			<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+			<script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
+			<link rel="stylesheet" href="/resources/demos/style.css" />
+			<script>
+			  $(function() {
+			    $( "#datepicker" ).datepicker({ dateFormat: 'DD dd/MM/yy'});
+			  });
+			</script>
+ 			-->
+		
+		<!-- Código del Datepicker de JQuery UI en Español -->
+
+			<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />
+			<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+			<script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
+
+			<script type="text/javascript">
+				$.datepicker.regional['es'] = {
+				closeText: 'Cerrar',
+				prevText: '< Ant',
+				nextText: 'Sig >',
+				currentText: 'Hoy',
+				monthNames: ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'],
+				monthNamesShort: ['ene','feb','mar','abr', 'may','jun','jul','ago','sep', 'oct','nov','dic'],
+				dayNames: ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'],
+				dayNamesShort: ['dom','lun','mar','mié','juv','vie','sáb'],
+				dayNamesMin: ['do','lu','ma','mi','ju','vi','sá'],
+				weekHeader: 'Sm',
+				dateFormat: 'DD dd M yy',
+				firstDay: 1,
+				isRTL: false,
+				showMonthAfterYear: false,
+				yearSuffix: '',
+				minDate: 1
+				};
+				$.datepicker.setDefaults($.datepicker.regional['es']);
+
+				$(function () {
+				$("#fecha1").datepicker({
+    			beforeShowDay: function(date) {
+        		var day = date.getDay();
+        		return [(day != 0), ''];
+    			}
+				});
+				});
+
+				$(function () {
+				$("#fecha2").datepicker({
+    			beforeShowDay: function(date) {
+        		var day = date.getDay();
+        		return [(day != 0), ''];
+    			}
+				});
+				});
+
+				</script>
+					
+		<style>
+			form#multiphase > #SelectCursoTaller, #Ubicacion, #Grupo1, #InfoCliente, #Resumen {display:none;}
+
+			h1 {font-size:14px; font-weight:bold;}
+			h2 {font-size:12px; font-weight:bold;}
+			p {font-size: 11px; padding: 0px; margin: 0px; border: 0px;}
+
+		</style>
+
+		<script>
+
+			var NomContact, NomEmpresa, CedRuc, EmailClien, TelClien, RubTra, CodProm, PartGrupo1, LaptopsGrupo1, fecha1, HoraGrupo1Sesion1, fecha2, HoraGrupo1Sesion2, cursoTaller, SelectUbicacion;
+
+
+			function _(x){
+				return document.getElementById(x);
+				}	
+
+			function processselecTipo() {
+				_("selecTipo").style.display="none";
+				_("SelectCursoTaller").style.display="block";
+				}
+
+			function processSelectCursoTaller() {
+				cursoTaller = _("cursoTaller").value; 
+				
+				if(cursoTaller != "Seleccionar"){
+				_("SelectCursoTaller").style.display="none";
+				_("Ubicacion").style.display="block";
+				}
+
+				else {
+					alert("Por favor seleccionar un curso o taller.")
+				}
+				}
+
+			function processUbicacion() {
+				SelectUbicacion = _("SelectUbicacion").value; 
+				
+				if(SelectUbicacion != "Seleccionar"){
+				_("Ubicacion").style.display="none";
+				_("Grupo1").style.display="block";
+				}
+
+				else {
+					alert("Por favor seleccionar la ubicación del curso o taller.")
+				}
+				}
+
+			function processGrupo1() {
+				PartGrupo1 = _("PartGrupo1").value; 
+				LaptopsGrupo1 = _("LaptopsGrupo1").value;
+				fecha1 = _("fecha1").value;
+				HoraGrupo1Sesion1 = _("HoraGrupo1Sesion1").value;
+				fecha2 = _("fecha2").value;
+				HoraGrupo1Sesion2 = _("HoraGrupo1Sesion2").value;
+				
+				if(PartGrupo1 != "Seleccionar" && HoraGrupo1Sesion1 != "Seleccionar" && HoraGrupo1Sesion2 != "Seleccionar"){
+
+				_("Grupo1").style.display="none";
+				_("InfoCliente").style.display="block";
+				}
+
+				else {
+					alert("Por favor completar la información requerida.")
+				}
+				}
+
+			function processInfoCliente() {
+				NomContact = _("NomContact").value;
+				NomEmpresa = _( "NomEmpresa").value;
+				CedRuc = _("CedRuc").value;
+				EmailClien = _( "EmailClien").value;
+				TelClien = _("TelClien").value;
+				RubTra = _("RubTra").value;
+				CodProm = _("CodProm").value;
+
+				_("InfoCliente").style.display="none";
+				_("Resumen").style.display="block";
+					_("display_NomContact").innerHTML = NomContact;
+					_("display_NomEmpresa").innerHTML = NomEmpresa;
+					_("display_CedRuc").innerHTML = CedRuc;
+					_("display_EmailClien").innerHTML = EmailClien;	
+					_("display_TelClien").innerHTML = TelClien;
+					_("display_RubTra").innerHTML = RubTra;
+					_("display_CodProm").innerHTML = CodProm;
+
+					_("display_cursoTaller").innerHTML = cursoTaller;
+					_("display_SelectUbicacion").innerHTML = SelectUbicacion;
+
+					_("display_PartGrupo1").innerHTML = PartGrupo1;
+					_("display_LaptopsGrupo1").innerHTML = LaptopsGrupo1;
+					_("display_fecha1").innerHTML = fecha1;
+					_("display_HoraGrupo1Sesion1").innerHTML = HoraGrupo1Sesion1;
+					_("display_fecha2").innerHTML = fecha2;
+					_("display_HoraGrupo1Sesion2").innerHTML = HoraGrupo1Sesion2; 
+
+				}
+
+		</script>
+
+		</head>
+
+		<body style="font-family: Nimbus Sans L, sans-serif;">
+
+			<form id="multiphase" onsubmit="return false" style="margin: auto; border:#000 1px solid; padding:24px; height: 350px; width: 350px; margin-top: 50px; background-color: RGBa(211,211,211,.7);">
+
+				<!-- Esta es la ventana principal -->
+				
+
+
+				<div id="selecTipo">
+					
+					<h1>Cotize y Reserve en Línea</h1>
+
+					<p>¿Que producto desea cotizar?</p>
+
+					<button onclick="processselecTipo()">Cursos Cliente Empresarial</button>
+					
+					</div>
+
+
+				<!-- Aquí inicia el cotizador para empresas -->
+
+				<div id="SelectCursoTaller">
+
+					<h2>Cursos Cliente Empresarial</h2>
+
+					<p>Seleccione el curso que desea cotizar.</p>
+					<select id="cursoTaller" name="cursoTaller">
+							<option value="Seleccionar">Seleccionar</option>
+							<option value="Curso Básico de Excel">Curso Básico de Excel - $200.00</option>
+							<option value="Curso Intermedio de Excel">Curso Intermedio de Excel - $250.00</option>
+							<option value="Curso Avanzado de Excel">Curso Avanzado de Excel - $300.00</option>
+							<option value="Curso Básico-Intermedio">Curso Básico-Intermedio - $240.00</option>
+							<option value="Curso Intermedio-Avanzado">Curso Intermedio-Avanzado - $240.00</option>
+					</select><br />
+					
+					<button onclick="processSelectCursoTaller()">Siguiente</button>
+
+					</div>
+
+				<div id="Ubicacion">
+					
+					<h2>Cursos Cliente Empresarial</h2>
+
+
+					<p>¿Desea que el curso o taller se realice en sus oficinas?</p>
+					<select id="SelectUbicacion" name="SelectUbicacion">
+							<option value="Seleccionar">Seleccionar</option>
+							<option value="Si">Sí</option>
+							<option value="No">No</option>
+					</select><br />
+					
+					<button onclick="processUbicacion()">Siguiente</button>
+
+					</div>
+
+				<div id="Grupo1">
+					
+					<h2>Cursos Cliente Empresarial</h2>
+
+
+					<p>Complete la siguiente información para el Grupo 1:</p>
+
+					<p>Seleccione la cantidad de participantes</p>
+					<select id="PartGrupo1" name="PartGrupo1">
+							<option value="Seleccionar">Seleccionar</option>
+							<option value=1>01</option>
+							<option value=2>02</option>
+							<option value=3>03</option>
+							<option value=4>04</option>
+							<option value=5>05</option>
+							<option value=6>06</option>
+							<option value=7>07</option>
+							<option value=8>08</option>
+							<option value=9>09</option>
+							<option value=10>10</option>
+							<option value=11>11</option>
+							<option value=12>12</option>
+							<option value=13>13</option>
+							<option value=14>14</option>
+							<option value=15>15</option>
+							<option value=16>16</option>
+							<option value=17>17</option>
+							<option value=18>18</option>
+							<option value=19>19</option>
+							<option value=20>20</option>
+					</select>
+
+					<p>Seleccione la cantidad de laptops</p>
+					<select id="LaptopsGrupo1" name="LaptopsGrupo1">
+							<option value=0>0</option>
+							<option value=1>01</option>
+							<option value=2>02</option>
+							<option value=3>03</option>
+							<option value=4>04</option>
+							<option value=5>05</option>
+							<option value=6>06</option>
+							<option value=7>07</option>
+							<option value=8>08</option>
+							<option value=9>09</option>
+							<option value=10>10</option>
+							<option value=11>11</option>
+							<option value=12>12</option>
+							<option value=13>13</option>
+							<option value=14>14</option>
+							<option value=15>15</option>
+							<option value=16>16</option>
+							<option value=17>17</option>
+							<option value=18>18</option>
+							<option value=19>19</option>
+							<option value=20>20</option>
+					</select>
+
+					<p>Fecha y Hora (Sesión 1)</p>
+					<input type="text" id="fecha1" value=""/>
+
+					<select id="HoraGrupo1Sesion1" name="HoraGrupo1Sesion1">
+							<option value="Seleccionar">Seleccionar</option>
+							<option value="08:00 a.m.">08:00 a.m.</option>
+							<option value="09:00 a.m.">09:00 a.m.</option>
+							<option value="10:00 a.m.">10:00 a.m.</option>
+							<option value="11:00 a.m.">11:00 a.m.</option>
+							<option value="12:00 p.m.">12:00 p.m.</option>
+							<option value="01:00 p.m.">01:00 p.m.</option>
+							<option value="02:00 p.m.">02:00 p.m.</option>
+							<option value="03:00 p.m.">03:00 p.m.</option>
+							<option value="04:00 p.m.">04:00 p.m.</option>
+							<option value="05:00 p.m.">05:00 p.m.</option>
+						</select><br />
+
+					<p>Fecha y Hora (Sesión 2)</p>
+					<input type="text" id="fecha2" value=""/>
+
+					<select id="HoraGrupo1Sesion2" name="HoraGrupo1Sesion2">
+							<option value="Seleccionar">Seleccionar</option>
+							<option value="08:00 a.m.">08:00 a.m.</option>
+							<option value="09:00 a.m.">09:00 a.m.</option>
+							<option value="10:00 a.m.">10:00 a.m.</option>
+							<option value="11:00 a.m.">11:00 a.m.</option>
+							<option value="12:00 p.m.">12:00 p.m.</option>
+							<option value="01:00 p.m.">01:00 p.m.</option>
+							<option value="02:00 p.m.">02:00 p.m.</option>
+							<option value="03:00 p.m.">03:00 p.m.</option>
+							<option value="04:00 p.m.">04:00 p.m.</option>
+							<option value="05:00 p.m.">05:00 p.m.</option>
+						</select><br />
+					
+					<!--
+					<button onclick="">Agregar Otro Grupo</button>
+					-->
+
+					<button onclick="processGrupo1()">Siguiente</button>
+
+					</div>
+
+				<div id="InfoCliente">
+					
+					<h2>Cursos Cliente Empresarial</h2>
+
+
+					<p>Complete la siguiente información:</p>
+
+					<p>Nombre de Contacto</p>
+					<input type="text" id="NomContact" name="NomContact"><br />
+					
+					<p>Empresa</p>
+					<input type="text" id="NomEmpresa" name="NomEmpresa"><br />
+					
+					<p>Cédula o RUC</p>
+					<input type="text" id="CedRuc" name="CedRuc"><br />		
+
+					<p>Correo Electrónico</p>
+					<input type="email" id="EmailClien" name="EmailClien"><br />	
+
+					<p>Teléfono de Contacto</p>
+					<input type="tel" id="TelClien" name="TelClien"><br />
+
+					<p>Rubro de Trabajo</p>	
+					<input type="text" id="RubTra" name="RubTra"><br />	
+
+					<p>Código Promocional</p>
+					<input type="text" id="CodProm" name="CodProm"><br />
+
+					<button onclick="processInfoCliente()">Siguiente</button>
+
+					</div>
+
+
+				<!-- Hoja de resumen -->
+
+				<div id="Resumen">
+					<h1>Resumen de Solicitud:</h1>
+
+					<p>Nombre de Contacto: <span id="display_NomContact"></span></p>
+					<p>Empresa: <span id="display_NomEmpresa"></span></p>
+					<p>Cédula o RUC: <span id="display_CedRuc"></span></p>
+					<p>Correo Electrónico: <span id="display_EmailClien"></span></p>	
+					<p>Teléfono de Contacto: <span id="display_TelClien"></span></p>
+					<p>Rubro de Trabajo: <span id="display_RubTra"></span></p>
+					<p>Código Promocional: <span id="display_CodProm"></span></p>
+
+					<p>Curso: <span id="display_cursoTaller"></span></p>
+					<p>En Oficina del Cliente: <span id="display_SelectUbicacion"></span></p>
+
+					<p>Participantes: <span id="display_PartGrupo1"></span></p>
+					<p>Laptops: <span id="display_LaptopsGrupo1"></span></p>
+
+					<br />
+					<p>Sesión 1</p>
+					<p>Fecha: <span id="display_fecha1"></span></p>	
+					<p>Hora: <span id="display_HoraGrupo1Sesion1"></span></p>
+					
+					<br />
+					<p>Sesión 2</p>
+					<p>Fecha: <span id="display_fecha2"></span></p>
+					<p>Hora: <span id="display_HoraGrupo1Sesion2"></span></p> 
+
+					<!--  <button onclick="EnviarSolicitud()">Enviar Solicitud</button> -->
+					
+					<form method="POST" action="https://script.google.com/macros/s/AKfycbwoUoLtzdslx-C7KhCyEj5CtDK5AunzDNYMsoWOIJrJs7Xzw0I/exec">
+
+					<input type="submit" id="EnviarSolicitud" value="Enviar Solicitud"> 
+
+					</form>
+
+					</div>					
+
+			</form>
+
+		</body>
+
+</html>
